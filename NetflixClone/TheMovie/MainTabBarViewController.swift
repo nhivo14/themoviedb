@@ -28,7 +28,7 @@ class MainTabBarViewController: UITabBarController  {
         nav3.title = "Top search"
         nav4.title = "Downloads"
         
-        tabBar.tintColor = .label
+        tabBar.tintColor = .cyan
          
         setViewControllers([nav1, nav2, nav3, nav4], animated: true)
 

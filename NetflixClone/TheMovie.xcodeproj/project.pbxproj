@@ -20,6 +20,10 @@
 		2A8E1F982B65487D0079ADB0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A8E1F962B65487D0079ADB0 /* LaunchScreen.storyboard */; };
 		2AD23C7B2B68912C00235B58 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 2AD23C7A2B68912C00235B58 /* Alamofire */; };
 		2AD23C7E2B6897FD00235B58 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD23C7D2B6897FD00235B58 /* NetworkManager.swift */; };
+		2AD23CA12B69090700235B58 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD23CA02B69090700235B58 /* Strings.swift */; };
+		2AD23CA32B69361700235B58 /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD23CA22B69361700235B58 /* Endpoints.swift */; };
+		2AD23CA52B693B2400235B58 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD23CA42B693B2400235B58 /* Movie.swift */; };
+		2AD23CA92B69523100235B58 /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD23CA82B69523100235B58 /* APICaller.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +41,10 @@
 		2A8E1F972B65487D0079ADB0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2A8E1F992B65487D0079ADB0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2AD23C7D2B6897FD00235B58 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		2AD23CA02B69090700235B58 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
+		2AD23CA22B69361700235B58 /* Endpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoints.swift; sourceTree = "<group>"; };
+		2AD23CA42B693B2400235B58 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		2AD23CA82B69523100235B58 /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +140,7 @@
 		2AD23C762B681AEF00235B58 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				2AD23CA42B693B2400235B58 /* Movie.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -139,6 +148,7 @@
 		2AD23C772B681AF700235B58 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				2AD23C9F2B6908D500235B58 /* Constants */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -147,8 +157,18 @@
 			isa = PBXGroup;
 			children = (
 				2AD23C7D2B6897FD00235B58 /* NetworkManager.swift */,
+				2AD23CA82B69523100235B58 /* APICaller.swift */,
 			);
 			path = Managers;
+			sourceTree = "<group>";
+		};
+		2AD23C9F2B6908D500235B58 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				2AD23CA02B69090700235B58 /* Strings.swift */,
+				2AD23CA22B69361700235B58 /* Endpoints.swift */,
+			);
+			path = Constants;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -228,14 +248,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				2A4428312B65521C00CA5417 /* SearchViewController.swift in Sources */,
+				2AD23CA12B69090700235B58 /* Strings.swift in Sources */,
 				2A8E1F902B65487C0079ADB0 /* MainTabBarViewController.swift in Sources */,
+				2AD23CA92B69523100235B58 /* APICaller.swift in Sources */,
 				2AD23C7E2B6897FD00235B58 /* NetworkManager.swift in Sources */,
 				2A8E1F8C2B65487C0079ADB0 /* AppDelegate.swift in Sources */,
 				2A4428332B65526100CA5417 /* DownloadViewController.swift in Sources */,
 				2A8E1F8E2B65487C0079ADB0 /* SceneDelegate.swift in Sources */,
 				2A5A78D32B65EAA100CA4346 /* FeedCollectionTableViewCell.swift in Sources */,
+				2AD23CA52B693B2400235B58 /* Movie.swift in Sources */,
 				2A44282F2B6551CE00CA5417 /* UpcomingViewController.swift in Sources */,
 				2A44282D2B6551A100CA5417 /* HomeViewController.swift in Sources */,
+				2AD23CA32B69361700235B58 /* Endpoints.swift in Sources */,
 				2A5A78D72B67368A00CA4346 /* BigHeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
