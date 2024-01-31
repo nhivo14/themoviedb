@@ -23,6 +23,7 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        getTrendingMovies()
 
     }
     
@@ -31,7 +32,7 @@ class HomeViewController: UIViewController {
         homeFeedTableView.frame = view.bounds
     }
     
-//    MARK: - Functions
+//    MARK: - UI Configuration
     private func  setupUI() {
         view.backgroundColor = .systemBackground
         
@@ -46,17 +47,25 @@ class HomeViewController: UIViewController {
     }
     
     private func configNavbar() {
-        var image = UIImage(named: "logo_Netflix_resize")
+        var image = UIImage(named: "logo_dmdb_resize")
         image = image?.withRenderingMode(.alwaysOriginal)
         let logoButton = UIBarButtonItem(image: image, style: .done, target: self, action: nil)
         logoButton.width = 30
         navigationItem.leftBarButtonItem = logoButton
         
+        let personButton = UIBarButtonItem(image: UIImage(systemName: "person"), style: .done, target: self, action: nil)
+        let playingButton = UIBarButtonItem(image: UIImage(systemName: "play.rectangle"), style: .done, target: self, action: nil)
         navigationItem.rightBarButtonItems = [
-            UIBarButtonItem(image: UIImage(systemName: "person"), style: .done, target: self, action: nil),
-            UIBarButtonItem(image: UIImage(systemName: "play.rectangle"), style: .done, target: self, action: nil)
+            personButton,
+            playingButton
         ]
-        navigationController?.navigationBar.tintColor = .label
+        
+        navigationController?.navigationBar.tintColor = .cyan
+    }
+    
+//    MARK: - Data Handling
+    private func getTrendingMovies() {
+        APICaller.shared.getAllTrending()
     }
 
 }
@@ -97,7 +106,7 @@ extension HomeViewController: UITableViewDataSource {
         guard let headerView = view as? UITableViewHeaderFooterView else {return}
         headerView.textLabel?.font = .systemFont(ofSize: 18, weight: .semibold)
         headerView.textLabel?.frame = CGRect(x: headerView.bounds.origin.x, y: headerView.bounds.origin.y, width: 120, height: headerView.bounds.height)
-        headerView.textLabel?.textColor = .white
+        headerView.textLabel?.textColor = .systemCyan
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
