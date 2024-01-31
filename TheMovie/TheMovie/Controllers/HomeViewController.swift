@@ -7,23 +7,32 @@
 
 import UIKit
 
+enum Selections: Int {
+    case TrendingMovies = 0
+    case TrendingTV = 1
+    case Popular = 2
+    case Upcoming = 3
+    case TopRated = 4
+}
+
 class HomeViewController: UIViewController {
 //    MARK: - UI Items
     private let homeFeedTableView: UITableView = UITableView(frame: .zero, style: .grouped)
     
 //    MARK: - Varibales
     let sectionTitles: [String] = [
-        "Top trending",
-        "TV shows",
-        "Top rated",
-        "Upcoming movies"
+        "Trending movies",
+        "Trending TV shows",
+        "Popular",
+        "Upcoming movies",
+        "Top rated"
     ]
 
 //    MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        getTrendingMovies()
+//        fetchData()
 
     }
     
@@ -64,14 +73,18 @@ class HomeViewController: UIViewController {
     }
     
 //    MARK: - Data Handling
-    private func getTrendingMovies() {
-        APIService.shared.getAllTrending { result in
-            switch result {
-            case .success(let response):
-                print(response.results)
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
+    private func fetchData() {
+//        APIService.shared.getAllTrending { result in
+//            switch result {
+//            case .success(let response):
+//                print(response.results)
+//            case .failure(let error):
+//                print(error.localizedDescription)
+//            }
+//        }
+        
+        APIService.shared.getTrendingTvShows { _ in
+            
         }
     }
 
@@ -94,6 +107,61 @@ extension HomeViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: FeedCollectionTableViewCell.identifier, for: indexPath) as? FeedCollectionTableViewCell else { return UITableViewCell() }
+        switch indexPath.section {
+        case Selections.TrendingMovies.rawValue:
+            APIService.shared.getTrendingMovies { result in
+                switch result {
+                case .success(let response):
+                    cell.configType(type: .movie)
+                    cell.configMovies(movies: response.results)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+        case Selections.TrendingTV.rawValue:
+            APIService.shared.getTrendingTvShows { result in
+                switch result {
+                case .success(let response):
+                    cell.configType(type: .tv)
+                    cell.configTvShows(tvs: response.results)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+        case Selections.Popular.rawValue:
+            APIService.shared.getPoppular { result in
+                switch result {
+                case .success(let response):
+                    cell.configType(type: .movie)
+                    cell.configMovies(movies: response.results)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+        case Selections.Upcoming.rawValue:
+            APIService.shared.getUpcoming { result in
+                switch result {
+                case .success(let response):
+                    cell.configType(type: .movie)
+                    cell.configMovies(movies: response.results)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+        case Selections.TopRated.rawValue:
+            APIService.shared.getTopRated { result in
+                switch result {
+                case .success(let response):
+                    cell.configType(type: .movie)
+                    cell.configMovies(movies: response.results)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+        default:
+            return UITableViewCell()
+        }
+        
         return cell
     }
     
@@ -114,7 +182,6 @@ extension HomeViewController: UITableViewDataSource {
         headerView.textLabel?.font = .systemFont(ofSize: 18, weight: .semibold)
         headerView.textLabel?.frame = CGRect(x: headerView.bounds.origin.x, y: headerView.bounds.origin.y, width: 120, height: headerView.bounds.height)
         headerView.textLabel?.textColor = .systemCyan
-        headerView.textLabel?.text = headerView.textLabel?.text?.capitalizeFirstLetter()
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

@@ -9,7 +9,6 @@ import Foundation
 
 struct Movie: Codable {
     let id: Int
-    let title: String?
     let original_language: String?
     let original_title: String?
     let overview: String?

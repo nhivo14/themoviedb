@@ -9,27 +9,25 @@ import Foundation
 import Alamofire
 
 class NetworkManager {
-    
-//    static let shared = NetworkManager()
-    
+        
     private let baseURL: String
     
     init() {
-        self.baseURL = StringConstants.baseURL
+        self.baseURL = Constants.baseURL
     }
     
     private func makeFullURL(endpoint: String) -> String {
         return baseURL + endpoint
     }
-
+    
     // MARK: - Generic Request
     
     private func request<T: Decodable>(endpoint: String,
-                                        method: HTTPMethod,
-                                        parameters: Parameters? = nil,
-                                        encoding: ParameterEncoding = URLEncoding.default,
-                                        headers: HTTPHeaders? = nil,
-                                        completion: @escaping (Result<T, Error>) -> Void) {
+                                       method: HTTPMethod,
+                                       parameters: Parameters? = nil,
+                                       encoding: ParameterEncoding = URLEncoding.default,
+                                       headers: HTTPHeaders? = nil,
+                                       completion: @escaping (Result<T, Error>) -> Void) {
         
         let fullURL = makeFullURL(endpoint: endpoint)
         
@@ -38,18 +36,26 @@ class NetworkManager {
                    parameters: parameters,
                    encoding: encoding,
                    headers: headers)
-            .validate(statusCode: 200..<300)
-            .responseDecodable(of: T.self) { response in
-                
-                switch response.result {
-                case .success(let value):
-                    completion(.success(value))
-                case .failure(let error):
-                    completion(.failure(error))
+        .validate(statusCode: 200..<300)
+        .responseDecodable(of: T.self) { response in
+            
+            switch response.result {
+            case .success(let value):
+                if let responseData = response.data,
+                   let jsonString = self.convertDataToJSONString(responseData) {
+                    print("Response data as JSON: \(jsonString)")
                 }
+                completion(.success(value))
+            case .failure(let error):
+                if let responseData = response.data,
+                   let jsonString = self.convertDataToJSONString(responseData) {
+                    print("Response data as JSON: \(jsonString)")
+                }
+                completion(.failure(error))
+            }
         }
     }
-
+    
     // MARK: - HTTP Methods
     
     func get<T: Decodable>(endpoint: String,
@@ -85,5 +91,18 @@ class NetworkManager {
         
         request(endpoint: endpoint, method: .delete, parameters: parameters, headers: headers, completion: completion)
     }
+    
+}
 
+extension NetworkManager {
+    private func convertDataToJSONString(_ data: Data) -> String? {
+        do {
+            let jsonObject = try JSONSerialization.jsonObject(with: data, options: [])
+            let jsonData = try JSONSerialization.data(withJSONObject: jsonObject, options: .prettyPrinted)
+            return String(data: jsonData, encoding: .utf8)
+        } catch {
+            print("Error converting data to JSON string: \(error)")
+            return nil
+        }
+    }
 }
