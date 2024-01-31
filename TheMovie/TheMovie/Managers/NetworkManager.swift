@@ -10,12 +10,12 @@ import Alamofire
 
 class NetworkManager {
     
-    static let shared = NetworkManager()
+//    static let shared = NetworkManager()
     
     private let baseURL: String
     
-    private init() {
-        self.baseURL = "https://api.themoviedb.org/3"
+    init() {
+        self.baseURL = StringConstants.baseURL
     }
     
     private func makeFullURL(endpoint: String) -> String {
@@ -45,9 +45,6 @@ class NetworkManager {
                 case .success(let value):
                     completion(.success(value))
                 case .failure(let error):
-//                    if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
-//                        print("Response data: \(utf8Text)")
-//                    }
                     completion(.failure(error))
                 }
         }
