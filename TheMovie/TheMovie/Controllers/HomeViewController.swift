@@ -65,7 +65,14 @@ class HomeViewController: UIViewController {
     
 //    MARK: - Data Handling
     private func getTrendingMovies() {
-        APICaller.shared.getAllTrending()
+        APIService.shared.getAllTrending { result in
+            switch result {
+            case .success(let response):
+                print(response.results)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
 
 }
@@ -107,6 +114,7 @@ extension HomeViewController: UITableViewDataSource {
         headerView.textLabel?.font = .systemFont(ofSize: 18, weight: .semibold)
         headerView.textLabel?.frame = CGRect(x: headerView.bounds.origin.x, y: headerView.bounds.origin.y, width: 120, height: headerView.bounds.height)
         headerView.textLabel?.textColor = .systemCyan
+        headerView.textLabel?.text = headerView.textLabel?.text?.capitalizeFirstLetter()
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

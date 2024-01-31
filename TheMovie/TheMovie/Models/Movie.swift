@@ -22,7 +22,7 @@ struct Movie: Codable {
 }
 
 struct TrendingMoviesResponse: Codable {
-    let result: [Movie]?
+    let results: [Movie]
 }
 /* "adult": false,
  "backdrop_path": "/cnqwv5Uz3UW5f086IWbQKr3ksJr.jpg",
