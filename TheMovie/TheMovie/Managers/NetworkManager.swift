@@ -17,7 +17,7 @@ class NetworkManager {
     }
     
     private func makeFullURL(endpoint: String) -> String {
-        return baseURL + endpoint
+        return baseURL + endpoint + Constants.API_KEY
     }
     
     // MARK: - Generic Request
@@ -41,16 +41,16 @@ class NetworkManager {
             
             switch response.result {
             case .success(let value):
-                if let responseData = response.data,
-                   let jsonString = self.convertDataToJSONString(responseData) {
-                    print("Response data as JSON: \(jsonString)")
-                }
+//                if let responseData = response.data,
+//                   let jsonString = self.convertDataToJSONString(responseData) {
+//                    print("Response data as JSON: \(jsonString)")
+//                }
                 completion(.success(value))
             case .failure(let error):
-                if let responseData = response.data,
-                   let jsonString = self.convertDataToJSONString(responseData) {
-                    print("Response data as JSON: \(jsonString)")
-                }
+//                if let responseData = response.data,
+//                   let jsonString = self.convertDataToJSONString(responseData) {
+//                    print("Response data as JSON: \(jsonString)")
+//                }
                 completion(.failure(error))
             }
         }
