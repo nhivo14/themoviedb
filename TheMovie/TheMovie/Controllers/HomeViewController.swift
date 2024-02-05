@@ -19,7 +19,7 @@ class HomeViewController: UIViewController {
 //    MARK: - UI Items
     private let homeFeedTableView: UITableView = UITableView(frame: .zero, style: .grouped)
     
-//    MARK: - Varibales
+//    MARK: - Properties
     let sectionTitles: [String] = [
         "Trending movies",
         "Trending TV shows",
@@ -27,13 +27,14 @@ class HomeViewController: UIViewController {
         "Upcoming movies",
         "Top rated"
     ]
+    
+    private let viewModel: HomeViewModel = HomeViewModel()
 
 //    MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchDataforAllSections()
         setupUI()
-//        fetchData()
-
     }
     
     override func viewDidLayoutSubviews() {
@@ -72,19 +73,12 @@ class HomeViewController: UIViewController {
         navigationController?.navigationBar.tintColor = .cyan
     }
     
-//    MARK: - Data Handling
-    private func fetchData() {
-//        APIService.shared.getAllTrending { result in
-//            switch result {
-//            case .success(let response):
-//                print(response.results)
-//            case .failure(let error):
-//                print(error.localizedDescription)
-//            }
-//        }
-        
-        APIService.shared.getTrendingTvShows { _ in
-            
+//    MARK: - Data Configuration
+    private func fetchDataforAllSections() {
+        viewModel.fetchDataAll { [weak self] in
+            DispatchQueue.main.async {
+                self?.homeFeedTableView.reloadData()
+            }
         }
     }
 
@@ -109,55 +103,15 @@ extension HomeViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: FeedCollectionTableViewCell.identifier, for: indexPath) as? FeedCollectionTableViewCell else { return UITableViewCell() }
         switch indexPath.section {
         case Selections.TrendingMovies.rawValue:
-            APIService.shared.getTrendingMovies { result in
-                switch result {
-                case .success(let response):
-                    cell.configType(type: .movie)
-                    cell.configMovies(movies: response.results)
-                case .failure(let error):
-                    print(error.localizedDescription)
-                }
-            }
+            cell.configureData(type: .movie, data: viewModel.getTrendingMovies())
         case Selections.TrendingTV.rawValue:
-            APIService.shared.getTrendingTvShows { result in
-                switch result {
-                case .success(let response):
-                    cell.configType(type: .tv)
-                    cell.configTvShows(tvs: response.results)
-                case .failure(let error):
-                    print(error.localizedDescription)
-                }
-            }
+            cell.configureData(type: .tv, data: viewModel.getTrendingTvShows())
         case Selections.Popular.rawValue:
-            APIService.shared.getPoppular { result in
-                switch result {
-                case .success(let response):
-                    cell.configType(type: .movie)
-                    cell.configMovies(movies: response.results)
-                case .failure(let error):
-                    print(error.localizedDescription)
-                }
-            }
+            cell.configureData(type: .movie, data: viewModel.getPopularMovies())
         case Selections.Upcoming.rawValue:
-            APIService.shared.getUpcoming { result in
-                switch result {
-                case .success(let response):
-                    cell.configType(type: .movie)
-                    cell.configMovies(movies: response.results)
-                case .failure(let error):
-                    print(error.localizedDescription)
-                }
-            }
+            cell.configureData(type: .movie, data: viewModel.getUpcomingMovies())
         case Selections.TopRated.rawValue:
-            APIService.shared.getTopRated { result in
-                switch result {
-                case .success(let response):
-                    cell.configType(type: .movie)
-                    cell.configMovies(movies: response.results)
-                case .failure(let error):
-                    print(error.localizedDescription)
-                }
-            }
+            cell.configureData(type: .movie, data: viewModel.getTopRatedMovies())
         default:
             return UITableViewCell()
         }

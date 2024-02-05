@@ -43,7 +43,7 @@ class FeedCollectionTableViewCell: UITableViewCell {
         moviesCollectionView.frame = contentView.bounds
     }
     
-//    MARK: - Functions
+//    MARK: - UI Configuration
     private func setupUI() {
         contentView.backgroundColor = .systemPink
         contentView.addSubview(moviesCollectionView)
@@ -52,23 +52,23 @@ class FeedCollectionTableViewCell: UITableViewCell {
         moviesCollectionView.register(TrendingCollectionViewCell.self, forCellWithReuseIdentifier: TrendingCollectionViewCell.identifier)
     }
     
-    func configType(type: MediaTypes) {
+//    MARK: - Data Configuration
+    func configureData<T>(type: MediaTypes, data: T) {
         self.type = type
-    }
-    
-    func configMovies(movies: [Movie]) {
-        self.movies = movies
-        DispatchQueue.main.async { [weak self] in
-            self?.moviesCollectionView.reloadData()
+        switch type {
+        case .movie:
+            self.movies = data as! [Movie]
+            DispatchQueue.main.async { [weak self] in
+                self?.moviesCollectionView.reloadData()
+            }
+        case .tv:
+            self.tvs = data as! [Tv]
+            DispatchQueue.main.async { [weak self] in
+                self?.moviesCollectionView.reloadData()
+            }
         }
     }
-    
-    func configTvShows(tvs: [Tv]) {
-        self.tvs = tvs
-        DispatchQueue.main.async { [weak self] in
-            self?.moviesCollectionView.reloadData()
-        }
-    }
+
 }
 
 // MARK: - UICollectionViewDelegate
