@@ -17,7 +17,7 @@ class SearchResultViewController: UIViewController {
     
 //    MARK: - UI confiuration
     private func setupUI() {
-        view.backgroundColor = .cyan
+//        view.backgroundColor = .cyan
     }
 
 }
