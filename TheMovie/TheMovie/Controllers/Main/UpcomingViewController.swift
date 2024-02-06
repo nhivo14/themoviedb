@@ -13,7 +13,6 @@ class UpcomingViewController: UIViewController {
     private let upcomingTableView: UITableView = {
         let tableview = UITableView()
         tableview.separatorStyle = .singleLine
-        
         return tableview
     }()
     
@@ -39,7 +38,7 @@ class UpcomingViewController: UIViewController {
         view.backgroundColor = .systemBackground
         title = "Upcoming"
         view.addSubview(upcomingTableView)
-        upcomingTableView.register(UpcomingTableViewCell.self, forCellReuseIdentifier: UpcomingTableViewCell.identifier)
+        upcomingTableView.register(ItemTableViewCell.self, forCellReuseIdentifier: ItemTableViewCell.identifier)
         upcomingTableView.delegate = self
         upcomingTableView.dataSource = self
     }
@@ -70,7 +69,7 @@ extension UpcomingViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: UpcomingTableViewCell.identifier, for: indexPath) as? UpcomingTableViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ItemTableViewCell.identifier, for: indexPath) as? ItemTableViewCell else { return UITableViewCell() }
         let movies = viewModel.getUpcomingMovies()
         cell.configureData(movie: movies[indexPath.row])
         return cell

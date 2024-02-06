@@ -20,6 +20,6 @@ struct Tv: Codable {
     
 }
 
-struct TrendingTvResponse: Codable {
+struct ListTvResponse: Codable {
     let results: [Tv]
 }

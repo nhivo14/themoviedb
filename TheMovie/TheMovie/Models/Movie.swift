@@ -20,7 +20,7 @@ struct Movie: Codable {
     
 }
 
-struct TrendingMoviesResponse: Codable {
+struct ListMoviesResponse: Codable {
     let results: [Movie]
 }
 /* "adult": false,
