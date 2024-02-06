@@ -8,11 +8,15 @@
 import Foundation
 
 struct Endpoints {
-//    MARK: - Trending
+//    MARK: - Get Movies and Tvs
     static let getAllTrending = "/trending/all/day"
     static let getTrendingMovies = "/trending/movie/day"
     static let getTrendingTvShows = "/trending/tv/day"
     static let getPopular = "/movie/popular"
     static let getUpcoming = "/movie/upcoming"
     static let getTopRated = "/movie/top_rated"
+    
+//    MARK: - Discover
+    static let getDiscoverMovies = "/discover/movie"
 }
+

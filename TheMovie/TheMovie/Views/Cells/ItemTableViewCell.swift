@@ -7,9 +7,9 @@
 
 import UIKit
 
-class UpcomingTableViewCell: UITableViewCell {
+class ItemTableViewCell: UITableViewCell {
     
-    static let identifier = "UpcomingTableViewCell"
+    static let identifier = "ItemTableViewCell"
     
 //    MARK: - UI Items
     private let posterImageView: UIImageView = {
@@ -76,7 +76,7 @@ class UpcomingTableViewCell: UITableViewCell {
         let titleLabelConstraints: [NSLayoutConstraint] = [
             titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: 0),
             titleLabel.leadingAnchor.constraint(equalTo: posterImageView.trailingAnchor, constant: 10),
-            titleLabel.trailingAnchor.constraint(equalTo: playButton.leadingAnchor, constant: 10)
+            titleLabel.trailingAnchor.constraint(equalTo: playButton.leadingAnchor, constant: -10)
         ]
         NSLayoutConstraint.activate(titleLabelConstraints)
 
