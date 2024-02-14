@@ -45,11 +45,10 @@ class FeedCollectionTableViewCell: UITableViewCell {
     
 //    MARK: - UI Configuration
     private func setupUI() {
-        contentView.backgroundColor = .systemPink
         contentView.addSubview(moviesCollectionView)
         moviesCollectionView.delegate = self
         moviesCollectionView.dataSource = self
-        moviesCollectionView.register(TrendingCollectionViewCell.self, forCellWithReuseIdentifier: TrendingCollectionViewCell.identifier)
+        moviesCollectionView.register(ItemCollectionViewCell.self, forCellWithReuseIdentifier: ItemCollectionViewCell.identifier)
     }
     
 //    MARK: - Data Configuration
@@ -88,7 +87,7 @@ extension FeedCollectionTableViewCell: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TrendingCollectionViewCell.identifier, for: indexPath) as? TrendingCollectionViewCell  else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ItemCollectionViewCell.identifier, for: indexPath) as? ItemCollectionViewCell  else { return UICollectionViewCell() }
         switch self.type {
         case .movie:
             cell.configData(with: movies[indexPath.row].poster_path ?? "Check")

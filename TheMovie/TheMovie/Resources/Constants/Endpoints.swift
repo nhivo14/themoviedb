@@ -18,5 +18,8 @@ struct Endpoints {
     
 //    MARK: - Discover
     static let getDiscoverMovies = "/discover/movie"
+    
+//    MARK: - Search movies
+    static let searchMovies = "/search/movie"
 }
 

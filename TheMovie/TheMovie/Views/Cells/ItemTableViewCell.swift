@@ -55,7 +55,7 @@ class ItemTableViewCell: UITableViewCell {
         contentView.addSubview(titleLabel)
         contentView.addSubview(playButton)
         applyconstraints()
-        
+                
     }
     
     private func applyconstraints() {

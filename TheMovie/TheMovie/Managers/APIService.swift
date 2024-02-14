@@ -45,4 +45,13 @@ class APIService {
     func getDiscoverMovie(completion: @escaping (Result<ListMoviesResponse, Error>) -> Void) {
         networkManager.get(endpoint: Endpoints.getDiscoverMovies, completion: completion)
     }
+    
+//    MARK: - Search
+    func searchMovies(keyword: String, completion: @escaping (Result<ListMoviesResponse, Error>) -> Void) {
+        guard let query = keyword.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else { return }
+        let parameters: [String: Any] = [
+            "query": query
+        ]
+        networkManager.get(endpoint: Endpoints.searchMovies, parameters: parameters, completion: completion)
+    }
 }

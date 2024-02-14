@@ -47,12 +47,15 @@ class SearchViewController: UIViewController {
         navigationController?.navigationItem.largeTitleDisplayMode = .always
         navigationController?.navigationBar.tintColor = .systemCyan
         navigationItem.searchController = searchController
+        searchController.searchResultsUpdater = self
         
         searchTableView.register(ItemTableViewCell.self, forCellReuseIdentifier: ItemTableViewCell.identifier)
         searchTableView.dataSource = self
         searchTableView.delegate = self
+        searchTableView.backgroundColor = .clear
         
         view.addSubview(searchTableView)
+        
         
     }
     
@@ -85,6 +88,21 @@ extension SearchViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 160
+    }
+    
+}
+
+extension SearchViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        let searchBar = searchController.searchBar
+        guard let query = searchBar.text,
+              !query.trimmingCharacters(in: .whitespaces).isEmpty,
+              query.trimmingCharacters(in: .whitespaces).count >= 3,
+              let resultController = searchController.searchResultsController as? SearchResultViewController else { return }
+        viewModel.searchMovies(with: query) { [weak self] in
+            guard let result =  self?.viewModel.getSearchResult() else { return }
+            resultController.setupData(result: result)
+        }
     }
     
 }
