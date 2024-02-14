@@ -44,9 +44,8 @@ class HomeViewController: UIViewController {
     
 //    MARK: - UI Configuration
     private func  setupUI() {
-        view.backgroundColor = .systemBackground
-        
         view.addSubview(homeFeedTableView)
+        view.backgroundColor = .systemBackground
         homeFeedTableView.delegate = self
         homeFeedTableView.dataSource = self
         homeFeedTableView.register(FeedCollectionTableViewCell.self, forCellReuseIdentifier: FeedCollectionTableViewCell.identifier)

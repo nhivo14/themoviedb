@@ -8,9 +8,9 @@
 import UIKit
 import SDWebImage
 
-class TrendingCollectionViewCell: UICollectionViewCell {
+class ItemCollectionViewCell: UICollectionViewCell {
     
-    static let identifier = "TrendingCollectionViewCell"
+    static let identifier = "ItemCollectionViewCell"
     
     private let posterImageView: UIImageView = {
         let imageView = UIImageView()
@@ -37,9 +37,15 @@ class TrendingCollectionViewCell: UICollectionViewCell {
         addSubview(posterImageView)
     }
     
-    func configData(with path: String) {
-        let url = URL(string: Constants.baseURLImage + path)
-        posterImageView.sd_setImage(with: url)
+    func configData(with path: String?) {
+        if let path = path {
+            let url = URL(string: Constants.baseURLImage + path)
+            posterImageView.sd_setImage(with: url)
+        } else {
+            posterImageView.image = UIImage(systemName: "questionmark.circle")
+            posterImageView.tintColor = .label
+            posterImageView.contentMode = .scaleAspectFit
+        }
     }
     
 }

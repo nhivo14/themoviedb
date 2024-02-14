@@ -64,7 +64,7 @@ class BigHeaderView: UIView {
         let gradientLayer = CAGradientLayer()
         gradientLayer.colors = [
             UIColor.clear.cgColor,
-            UIColor.systemBackground.cgColor
+            UIColor.init(white: 0.5, alpha: 0.4).cgColor
         ]
         gradientLayer.frame = bounds
         layer.addSublayer(gradientLayer)
