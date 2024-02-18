@@ -4,17 +4,15 @@ TheMovie is a peronal iOS app developed from scratch using Swift, UIkit, Swift P
 For more information about the APIs, please visit [The Movie DB](https://developer.themoviedb.org/docs/getting-started)
 
 ## App in general 
-Currently, this app begin at Home screen, and other screens are still being developed.
+Currently, this app begin at Home screen, and other screens are still being developed. Below are some basic screens that have been done.
 
 **Home screen and Upcoming screen**
 
-![Home screen](https://drive.google.com/file/d/1qhA8ZKFQQtfKzx0J9GpidDAATYUSMLUM/view?usp=drive_link)
-![Upcoming screen](https://drive.google.com/file/d/1AwE9aFlaCwzneRan1xNqwtw5djmdA7x1/view?usp=drive_link)
+<img src="TheMovie/TheMovie/Assets.xcassets/Git_Images/HomeScreen.imageset/HomeScreen.png" alt="Home screen" width="250" height="550"> <img src="TheMovie/TheMovie/Assets.xcassets/Git_Images/Upcoming.imageset/Upcoming.png" alt="Upcoming screen" width="250" height="550">
 
 **Search and Search Result**
 
-![Search screen](https://drive.google.com/file/d/1jLmgc2qaDjQIPplanDI-RuuSrPcSRUSz/view?usp=drive_link)
-![Search Result screen](https://drive.google.com/file/d/1j-8ZD2CNscPZ03AtKESs5ItjJ5bXtL0q/view?usp=drive_link)
+<img src="TheMovie/TheMovie/Assets.xcassets/Git_Images/SearchScreen.imageset/SearchScreen.png" alt="Search screen" width="250" height="550"> <img src="TheMovie/TheMovie/Assets.xcassets/Git_Images/SearchResult.imageset/SearchResult.png" alt="Search result screen" width="250" height="550">
 
 ## Installation
 Just clone this app and run it.
