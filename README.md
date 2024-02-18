@@ -15,4 +15,4 @@ Currently, this app begin at Home screen, and other screens are still being deve
 <img src="TheMovie/TheMovie/Assets.xcassets/Git_Images/SearchScreen.imageset/SearchScreen.png" alt="Search screen" width="250" height="550"> <img src="TheMovie/TheMovie/Assets.xcassets/Git_Images/SearchResult.imageset/SearchResult.png" alt="Search result screen" width="250" height="550">
 
 ## Installation
-Just clone this app, wait a bit for all the packages resolved and run it.
+Just clone this repository, wait a bit for all the packages resolved and run it.
